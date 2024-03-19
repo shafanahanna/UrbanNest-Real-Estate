@@ -12,11 +12,11 @@ function App() {
     <div>
       <Header />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        {/* <Route path="/sign-in" element={<SignIn />} /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/Signup" element={<SignUp />} />
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

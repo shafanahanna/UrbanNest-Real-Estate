@@ -1,14 +1,6 @@
-export const tryCatchMiddleware = (trycatchHandler) => {
-  return async (req, res, next) => {
-    try {
-      await trycatchHandler(req, res, next);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        status: "failure",
-        message: "error",
-        error_message: error.message,
-      });
-    }
-  };
+export const errorHandler = (statusCode, message) => {
+  const error = new Error();
+  error.statusCode = statusCode;
+  error.message = message;
+  return error;
 };
