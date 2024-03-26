@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
 import Home from "./Pages/Home";
-import About from "./Pages/About";
+import Twilio from "./Pages/About";
 import SignIn from "./Pages/Signin";
 import SignUp from "./Pages/Signup";
-import Profile from "./Pages/profile";
+// import Profile from "./Pages/profile";
 import Header from "./Components/Header";
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/Signup" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/twilio" element={<Twilio />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </div>
   );

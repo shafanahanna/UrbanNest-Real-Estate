@@ -34,13 +34,9 @@ export const Signin = async (req, res, next) => {
       return next(errorHandler(401, "Wrong!"));
     }
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-        domain: sessionStorage,
-      })
+     res
       .status(200)
-      .json(validUser);
+      .json({token,user:validUser});
   } catch (error) {
     next(errorHandler);
   }

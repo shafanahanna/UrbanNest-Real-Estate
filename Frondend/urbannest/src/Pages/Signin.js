@@ -6,10 +6,16 @@ function SignIn() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  //   console.log(formData, "ooooooo");
+ 
+  //store token in localstorage
+  const handleSignInSuccess = (token) => {
+    localStorage.setItem("token", token);
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,25 +31,22 @@ function SignIn() {
         }
       );
 
-      // console.log(response.data, "hlo");
-      if (response.data.success === false) {
-        setError(response.data.message);
-        return;
-      }
-      setError(null);
-      navigate("/");
-    } catch (error) {
-      // console.error("Error:", error);
+      const { token } = response.data;
 
-      if (error.response.status === 404) {
+      // Call a function to handle sign-in success and store the token
+      handleSignInSuccess(token);
+    } catch (error) {
+      // Handle errors
+      if (error.response && error.response.status === 404) {
         setError("User not found");
-      } else if (error.response.status === 401) {
+      } else if (error.response && error.response.status === 401) {
         setError("Wrong Password");
       } else {
-        setError("An error occured!!,Please try again later");
+        setError("An error occurred! Please try again later");
       }
     }
   };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
@@ -67,7 +70,7 @@ function SignIn() {
         </button>
       </form>
       <div className="flex gap-2 mt-5">
-        <p>Dont have an account ?</p>
+        <p>Don't have an account?</p>
         <Link to={"/signup"}>
           <span className="text-blue-700">Sign up</span>
         </Link>

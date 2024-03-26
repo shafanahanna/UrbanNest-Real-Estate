@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import twilio from "twilio";
 import userRouter from "./Router/userRouter.js";
 import authRouter from "./Router/authRouter.js";
 dotenv.config();
-
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
@@ -15,16 +15,12 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 const port = 3000;
-
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error";
